@@ -1,7 +1,7 @@
 $.fn.quickDB.defaultOptions.tables = {
-	testtable:{
+	categories:{
 		fields: {
-			name: {type:'text',label:'Category',dvalidation:{required:true,match:[{rule:"no",message:"You must type no somewhere"},{rule:"way",message:"You must type way somewhere"}]}},
+			name: {type:'text',label:'Category',validation:{required:true,match:[{rule:"no",message:"You must type no somewhere"},{rule:"way",message:"You must type way somewhere"}]}},
 			image: {type:'image',label:'image'},
 			file: {type:'file',label:'file'},
 			color: {type:'color',label:'color',validathion:{required:true},depends:{'field':'name'}},
@@ -31,6 +31,7 @@ $.fn.quickDB.defaultOptions.tables = {
 			label: { fields:'categories.name as label' },
 			ddefault: { fields:'name,file,image' },
 			ddefault: { fields:'categories.name as name,selecttype,radio,checkbox,bool' },
-			default: { fields:'categories.name as name,color,date,datetime,email,month,range,search,tel,time,url,week,file,image,password,textarea,rte,selecttype,radio,checkbox,bool' }
+			default: { fields:'categories.name as name,categories.color as color,categories.date as date,categories.datetime as datetime,categories.email as email,categories.month as month,categories.range as range,categories.search as search,categories.tel as tel,categories.time as time,categories.url as url,categories.week as week,categories.file as file,categories.image as image,categories.password as password,categories.textarea as textarea,categories.rte as rte,categories.selecttype as selecttype,categories.radio as radio,categories.checkbox as checkbox,categories.bool as bool,categories.svg as svg' }
 		}
 	}
+}

@@ -4,7 +4,7 @@ $.fn.quickDB.defaultOptions.tables = {
 			name: {type:'text',label:'Category',dvalidation:{required:true,match:[{rule:"no",message:"You must type no somewhere"},{rule:"way",message:"You must type way somewhere"}]}},
 			image: {type:'image',label:'image'},
 			file: {type:'file',label:'file'},
-			color: {type:'color',label:'color',validathion:{required:true},depends:{'field':'name'}},
+			color: {type:'color',label:'color',validathion:{required:true},ddepends:{'field':'name'}},
 			date: {type:'date',label:'date'},
 			datetime: {type:'datetime',label:'datetime'},
 			email: {type:'email',label:'email'},

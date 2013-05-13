@@ -941,7 +941,7 @@ $.fn.quickDB.api.view = {
 							formInput="<textarea class='form-editingdata'  type='"+fieldType+"' >"+recordValue+"</textarea>";
 							if (fieldMeta.validation)  results.validation=$.extend({},fieldMeta.validation,{table:table,field:key,changeSelector:'.form-'+key+' textarea'});
 					} else if (fieldType=='svg') {
-							formInput="<iframe class='form-editingdata svgeditor' width='900' height='550' src='lib/svg-edit/svg-editor.html' />";
+							formInput="<iframe class='form-editingdata svgeditor' width='900' height='550' src='"+plugin.settings.iframeRelativePath+"lib/svg-edit/svg-editor.html' />";
 							results.svg=true;
 					}  else if (fieldType=='sheet') {
 						// ensure empty sheet 

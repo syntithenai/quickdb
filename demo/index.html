@@ -10,7 +10,7 @@
 <script src="../jquery.quickdb.view.js" type="text/javascript"></script>
 <script src="../jquery.quickdb.controller.js" type="text/javascript"></script>
 <!-- MODEL METATADATA -->
-<script src="metadata/accounts_fieldtest.js" type="text/javascript"></script>
+<script src="metadata/fieldstest.js" type="text/javascript"></script>
 <!-- include svg edit iframe embed lib -->
 <script type="text/javascript" src="../lib/svg-edit/embedapi.js"></script>
 <!-- include RTE -->
@@ -28,7 +28,7 @@
 
 <script>
 $(document).ready(function() {
-	$('.activatable').quickDB();
+	$('.activatable').quickDB({iframeRelativePath:'../'});
 });
 </script>
 </head>
