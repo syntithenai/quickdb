@@ -75,10 +75,23 @@ $.fn.quickDB.api.model={
 						var rowvalue=results.rows.item(i);
 						//console.log('rowvalue',rowvalue);
 						// extract fields
+						var createString=rowvalue.sql;
+						console.log('CREATE STATEMENT RAW',createString);
+						var virtual=false;
+						var fieldsOffset=3;
+						if (createString.indexOf('CREATE VIRTUAL TABLE')==0) {
+							virtual=true;
+							fieldsOffset=5;
+						}
 						var parts=rowvalue.sql.split(' ');
 						var table=rowvalue.name;
-						var createStatement=parts.slice(3).join(' ');
-						createStatement=createStatement.substring(1,(createStatement.length-1));
+						var createStatement=parts.slice(fieldsOffset).join(' ');
+						if (virtual) {
+							createStatement=createStatement.substring(5,(createStatement.length-1));
+						} else {
+							createStatement=createStatement.substring(1,(createStatement.length-1));
+						}
+						console.log('CREATE STATEMENT',createStatement);
 						var createParts=("rowid INT,"+createStatement).split(',');
 						if (!meta[table]) meta[table]={};
 						if (!meta[table].fields) meta[table].fields={};
@@ -92,11 +105,11 @@ $.fn.quickDB.api.model={
 						//meta[table].dataTokens="'"+fields.join("','")+"'";
 						lastTable=table;
 					}
-					console.log('EXPO TABLES',lastTable,meta);
+					//console.log('EXPO TABLES',lastTable,meta);
 					// NOW SELECT REAL DATA
 					$.each(meta,function(table,tableMeta) {					
 						var allRecordsQuery='select rowid,* from '+table;
-						console.log(format,allRecordsQuery);
+						//console.log(format,allRecordsQuery);
 						transaction.executeSql(plugin.api.view.logQuery(allRecordsQuery), [], 
 							function (tx,iresults) {
 								var tableExported=new Array();
@@ -108,7 +121,7 @@ $.fn.quickDB.api.model={
 										$.each(tableMeta.fields,function(field,fieldConfig) {
 											record[field]=realResult[field];
 										});
-										console.log(record);
+										//console.log(record);
 										tableExported.push(record);
 									} else if (format=='sql') {
 										var insertValues=[];
@@ -149,7 +162,7 @@ $.fn.quickDB.api.model={
 									*/
 								}  
 								// done building rows for this table
-								console.log('tableExported',tableExported);
+								//console.log('tableExported',tableExported);
 								//console.log(table,lastTable);
 								if (format=='json') {
 									//console.log('json');
