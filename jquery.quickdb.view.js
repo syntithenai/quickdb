@@ -573,8 +573,8 @@ $.fn.quickDB.api.view = {
 		$(plugin.listTarget).append(allRows);
 		plugin.timer.log('INITLIST START BINDING ');
 		// BIND CLICK FOR WHOLE LIST FOR EFFICIENCY
-		$('.editablerecords').unbind('click.editablerecords');
-		$('.editablerecords').bind('click.editablerecords',function(event) {
+		$('.editablerecords',plugin.listTarget).unbind('click.editablerecords');
+		$('.editablerecords',plugin.listTarget).bind('click.editablerecords',function(event) {
 		var target = event.target || event.srcElement || event.originalTarget;
 		if (target.nodeType == 3) target = target.parentNode;  // defeat Safari bug
 		
@@ -583,7 +583,7 @@ $.fn.quickDB.api.view = {
 				console.log('del');
 				plugin.api.controller.deleteRecord(table,plugin.api.view.getClickedRowId($(target).parent().parent()),$(target).parent().parent());
 			} else if ($(target).hasClass('editbutton')) {
-			console.log('edit',$(target).parent().parent(),plugin.api.view.getClickedRowId($(target).parent().parent()));
+			console.log('edit',table,$(target).parent().parent(),plugin.api.view.getClickedRowId($(target).parent().parent()));
 				plugin.api.controller.editRecord(table,plugin.api.view.getClickedRowId($(target).parent().parent()));
 			} else if ($(target).parent().hasClass('addbutton')) {
 				plugin.api.controller.newRecord(table);
